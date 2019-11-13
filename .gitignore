@@ -1,0 +1,8 @@
+db.sqlite3
+geckodriver.log
+bin/
+include/
+lib/
+.Python
+superlists/__init__.py
+superlists/__pycache__/
