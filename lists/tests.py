@@ -20,6 +20,6 @@ class HomePageTest(TestCase):
         # Response = uma view criado recebendo um request como parametro
         response = home_page(request)
         html = response.content.decode('UTF-8')
-        self.assertTrue(html.startswith('<htm>))
+        self.assertTrue(html.startswith('<html>'))
         self.assertIn('<title>To-Do lists</title>', html)
         self.assertTrue(html.endswith('</html>'))
