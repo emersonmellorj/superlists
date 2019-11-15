@@ -19,7 +19,14 @@ class HomePageTest(TestCase):
          response = self.client.get('/')
          # Verificar se estou recebendo o template correto na renderizacao da resposta
          self.assertTemplateUsed(response, 'home.html')  
+    
+    
+    def test_can_save_a_POST_request(self):
         
+        response=self.client.post('/', data={'item_text': 'A new list item'})
+        self.assertIn('A new list item', response.content.decode()) 
+        self.assertTemplateUsed(response, 'home.html') 
+    
     
     # Este metodo foi substituido pelo metodo acima
     def test_home_page_returns_correct_html(self):
