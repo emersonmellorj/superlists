@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from.models import Item
+from .models import Item
 
 # Create your views here.
 def home_page(request):
@@ -26,3 +26,8 @@ def home_page(request):
     
     # Primeiro teste de conteudo de retorno da view
     #return HttpResponse('<html><title>To-Do lists</title></html>')
+    
+
+def java_script(request):
+    
+    return render(request, 'javascript.html', {})

@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import resolve
-from .views import home_page
+from .views import home_page, java_script
 from django.http import HttpRequest
 from .models import Item
 
@@ -101,3 +101,19 @@ class ItemModelTest(TestCase):
         self.assertEqual(first_saved_item.text, 'The first (ever) list item')
         self.assertEqual(second_saved_item.text, 'Item the second')
         
+    
+
+class EstudoJavaScript(TestCase):
+    
+    def test_url_return_correct_template(self):
+        
+        found = resolve('/java_script/')
+        
+        # Testando se o nome da view chamada pela URL / e a home_page
+        self.assertEqual(found.func, java_script)
+        
+        response = self.client.get('/java_script/')
+        html = response.content.decode('UTF-8')
+        
+        self.assertIn('Pagina de Estudo de JavaScript', html)
+        self.assertTemplateUsed(response, 'javascript.html')
