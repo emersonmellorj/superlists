@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <script type = "text/javascript" src="/static/js/estudo.js"></script>
+        <title>Estudo de JavaScript</title>
+        <h1>Pagina de Estudo de JavaScript</h1>
+    </head>
+    <body>
+        <div>
+            <p>Irei testar varias funcoes de javascript nesta pagina.</p>
+            <p id="demo"></p>
+        </div>
+
+        <script>
+            document.getElementById("demo").innerHTML = "Teste de Scripts";
+            var x = new Number(155);
+            document.write(typeof x);
+    
+            array_ex = ['first', 'second', 'third', 'forthy', 'fifthy'];
+            document.write(array_ex[1]);
+
+            for (x in array_ex){
+                document.write(" " + array_ex[x]);
+            }
+
+        </script><br /><br />
+
+        <button type='button' onclick="funcFirst()"/>Clique aqui!</button>
+
+        <!-- Funcao que ira ler um array e escrever os valores separados por linha -->
+        <script>
+
+            pulaLinha();
+            pulaLinha();
+
+            var fruits = ["banana", "maca", "uva", "abacate", "laranja"];
+
+            for (x in fruits){
+
+                document.write(fruits[x]);
+                pulaLinha();
+            }
+
+        </script>
+
+    </body>
+</html>

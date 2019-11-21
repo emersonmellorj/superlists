@@ -6,3 +6,5 @@ lib/
 .Python
 superlists/__init__.py
 superlists/__pycache__/
+lists/__pycache__/
+lists/migrations/__pycache__/
