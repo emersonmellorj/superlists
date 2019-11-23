@@ -104,8 +104,9 @@ class NewVisitorTest(LiveServerTestCase):
         
         # Francis acessa a pagina inicial. Nao ha nenhum sinal da lista de Edith
         self.browser.get(self.live_server_url)
-        page_text = self.browser.find_element_by_tag_name('body').text
-        self.assertNotIn('But peacock feathers', page_text)
+        page_text = self.browser.find_element_by_tag_name("body").text
+        print(page_text)
+        self.assertNotIn('Buy peacock feathers', page_text)
         self.assertNotIn('make a fly', page_text)
         
         # Francis inicia uma nova lista inserindo um item novo. Ele é menos interessante que Edith
@@ -120,7 +121,8 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertNotEqual(francis_list_url, edith_list_url)
         
         # Novamente nao ha nenhum sinal da lista de Edith
-        page_text = self.browser.find_elements_by_tag_name('body').text
+        page_text = self.browser.find_element_by_tag_name("body").text
+        print(page_text)
         self.assertNotIn('Buy peacock feathers', page_text)
         self.assertIn('Buy milk', page_text)
         
