@@ -18,7 +18,7 @@ from django.urls import path, include, re_path
 from lists import views as list_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     path('java_script/', list_views.java_script, name='java_script'),
     re_path(r'^$', list_views.home_page, name='home'),
     re_path(r'^lists/', include('lists.urls')),
