@@ -38,7 +38,9 @@ def new_list(request):
     list_ = List.objects.create()
     new_item_text = request.POST['item_text']
     Item.objects.create(text=new_item_text, list=list_)
-    return redirect(f'/lists/{list_.id}/')
+    #return redirect(f'/lists/{list_.id}/')
+    address = '/lists/{}/'.format(list_.id)
+    return redirect(address)
      
     
 
@@ -46,7 +48,9 @@ def add_item(request, list_id):
     
     list_ = List.objects.get(id=list_id)
     Item.objects.create(text=request.POST['item_text'], list=list_)
-    return redirect(f'/lists/{list_.id}/')
+    # return redirect(f'/lists/{list_.id}/')
+    address = '/lists/{}/'.format(list_.id)
+    return redirect(address)
     
     
 
