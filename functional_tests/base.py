@@ -45,6 +45,22 @@ class FunctionalTest(StaticLiveServerTestCase):
                 time.sleep(0.5)
 
 
+    def wait_for(self, fn):
+        
+        start_time = time.time()
+        while True:
+        
+            try:
+                
+                return fn()
+            
+            except (AssertionError, WebDriverException) as e:
+                
+                if time.time() - start_time > MAX_WAIT:
+                    raise e
+                print(f'{time.time()} - {start_time}')
+                time.sleep(0.5)
+
 
  # Este if nao e mais necessario, pois estamor utilizando o servidor de testes do Django               
 if __name__ == '__main__':
