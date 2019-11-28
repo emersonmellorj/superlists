@@ -2,68 +2,15 @@
 ## Functional Tests fo application
 #######################################
 
+from .base import FunctionalTest
 from selenium import webdriver
-import unittest
-import time
 from selenium.webdriver.common.keys import Keys
-#from django.test import LiveServerTestCase
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-from selenium.common.exceptions import WebDriverException
-import os
+import time
 
-MAX_WAIT = 10
-
-class NewVisitorTest(StaticLiveServerTestCase):
-#class NewVisitorTest(unittest.TestCase):
-        
-    def setUp(self):
-        self.browser = webdriver.Firefox()
-        staging_server = os.environ.get('STAGING_SERVER')
-        if staging_server:
-            self.live_server_url = 'http://' + staging_server
-
-    def tearDown(self):
-        self.browser.quit()
-    
-    # Esta funcao ira verificar se a string digitada se encontra carregada dentro da row da pagina
-    def wait_for_row_in_list_table(self, row_text):
-        
-        start_time = time.time()
-        while True:
-        
-            try:
-        
-                table = self.browser.find_element_by_id('id_list_table')
-                rows = table.find_elements_by_tag_name('tr')
-                self.assertIn(row_text, [row.text for row in rows])
-                return
-            
-            except (AssertionError, WebDriverException) as e:
                 
-                if time.time() - start_time > MAX_WAIT:
-                    raise e
-                time.sleep(0.5)
-    
-    
-    def test_layout_and_styling(self):
-        
-        # Edith acessa a pagina inicial
-        self.browser.get(self.live_server_url)
-        self.browser.set_window_size(1024, 768)
-        
-        # Ela percebe que a caixa de entrada esta elegantemente centralizada
-        inputbox = self.browser.find_element_by_id('id_new_item')
-        self.assertAlmostEqual(inputbox.location['x'] + inputbox.size['width'] / 2, 512, delta=10)
-        
-        # Ela inicia uma nova lista e ve que a entrada esta elegantemente centralizada ai tambem
-        inputbox.send_keys('1 - testing')
-        inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1 - testing')
-        inputbox = self.browser.find_element_by_id('id_new_item')
-        self.assertAlmostEqual(inputbox.location['x'] + inputbox.size['width'] / 2, 512, delta=10)
-        
+class NewVisitorTest(FunctionalTest):
+#class NewVisitorTest(unittest.TestCase):
             
-        
     def test_can_start_a_list_for_one_user(self):
         # Edith ouviu falar de uma nova aplicacao online interessante para lista de tarefas. Ela decide verificar sua HP.
         self.browser.get(self.live_server_url)
@@ -151,9 +98,3 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertIn('Buy milk', page_text)
         
         # Satisfeitos, ambos voltam a dormir
-        
-
- 
-# Este if nao e mais necessario, pois estamor utilizando o servidor de testes do Django               
-if __name__ == '__main__':
-    unittest.main(warnings='ignore')
