@@ -1,8 +1,8 @@
 from django.test import TestCase
 from django.urls import resolve
-from .views import home_page, java_script
+from ..views import home_page, java_script
 from django.http import HttpRequest
-from .models import Item, List
+from ..models import Item, List
 
 # Create your tests here.
 class ListViewTest(TestCase):
@@ -83,39 +83,6 @@ class NewListTest(TestCase):
         #self.assertEqual(response.status_code, 302)
         #self.assertEqual(response['location'], '/lists/the-only-list-in-the-world/')
         
-    
-        
-# Second class        
-class ListAndItemModelTest(TestCase):
-    
-    def test_saving_and_retieving_items(self):
-        
-        list_ = List()
-        list_.save()
-        
-        first_item = Item()
-        first_item.text = 'The first (ever) list item'
-        first_item.list = list_
-        first_item.save()
-        
-        second_item = Item()
-        second_item.text = 'Item the second'
-        second_item.list = list_
-        second_item.save()
-        
-        saved_list = List.objects.first()
-        self.assertEqual(saved_list, list_)
-        
-        saved_items = Item.objects.all()
-        self.assertEqual(saved_items.count(), 2)
-        
-        first_saved_item = saved_items[0]
-        second_saved_item = saved_items[1]
-        self.assertEqual(first_saved_item.text, 'The first (ever) list item')
-        self.assertEqual(first_saved_item.list, list_)
-        self.assertEqual(second_saved_item.text, 'Item the second')
-        self.assertEqual(second_saved_item.list, list_)
-        
 
 
 class ListViewTest(TestCase):
@@ -147,8 +114,7 @@ class ListViewTest(TestCase):
         response = self.client.get(f'/lists/{correct_list.id}/')
         
         self.assertEqual(response.context['list'], correct_list)
-        
-        
+               
 
 class NewItemTest(TestCase):
     
