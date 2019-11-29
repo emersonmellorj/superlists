@@ -22,7 +22,7 @@
                             {% if error %}
                                 <input id="id_new_item" name="item_text" class = "form-control input-lg is-invalid" placeholder="Enter a to-do item"/>
                                 <div class="form-group has-error">
-                                    <span class="help-block">{{ error }}</span>
+                                    <span class="help-block"><div class="alert alert-danger" role="alert">{{ error }}</div></span>
                                 </div>
                             {% else %}
                                 <input id="id_new_item" name="item_text" class = "form-control input-lg" placeholder="Enter a to-do item"/>
