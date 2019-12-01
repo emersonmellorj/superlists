@@ -9,6 +9,7 @@ import time
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.common.exceptions import WebDriverException
 import os
+from selenium.webdriver.firefox.options import Options
 
 
 MAX_WAIT = 10
@@ -17,6 +18,9 @@ MAX_WAIT = 10
 class FunctionalTest(StaticLiveServerTestCase):
     
     def setUp(self):
+        #options = Options()
+        #options.add_argument('-headless')
+        #self.browser = webdriver.Firefox(options=options)
         self.browser = webdriver.Firefox()
         staging_server = os.environ.get('STAGING_SERVER')
         if staging_server:
