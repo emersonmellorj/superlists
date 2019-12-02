@@ -35,8 +35,8 @@ def view_list(request, list_id):
             item = Item(text=request.POST['item_text'], list=list_)
             item.full_clean()
             item.save()
-            address = '/lists/{}/'.format(list_.id)
-            return redirect(address)
+            #address = '/lists/{}/'.format(list_.id)
+            return redirect(list_)
     
         except ValidationError:
             error = "You can't have an empty list item"
@@ -64,8 +64,10 @@ def new_list(request):
         return render(request, 'home.html', {'error': error})
         
     #return redirect(f'/lists/{list_.id}/')
-    address = '/lists/{}/'.format(list_.id)
-    return redirect(address)
+    #address = '/lists/{}/'.format(list_.id)
+
+    # Function reverse url by Django
+    return redirect(list_)
      
     
 

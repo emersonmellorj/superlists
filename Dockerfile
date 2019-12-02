@@ -12,4 +12,6 @@ RUN pip3 install -r requirements.txt
 COPY . /code
 EXPOSE 8000
 EXPOSE 80
+#RUN python manage.py collectstatic --noinput
+COPY ./deploy_tools/nginx.conf /etc/nginx/nginx.conf
 #CMD exec gunicorn superlists.wsgi:application - bind 0.0.0.0:8000
