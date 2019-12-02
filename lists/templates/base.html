@@ -21,10 +21,10 @@
                            
                             {{ form.text }}
 
-                            {% if error %}
+                            {% if form.errors %}
                                 <!--<input id="id_new_item" name="item_text" class = "form-control input-lg is-invalid" placeholder="Enter a to-do item"/>-->
                                 <div class="form-group has-error">
-                                    <span class="help-block"></br><div class="alert alert-danger" role="alert">{{ error }}</div></span>
+                                    <span class="help-block"></br><div class="alert alert-danger" role="alert">{{ form.text.errors }}</div></span>
                                 </div>
                             {% else %}
                                 <!--<input id="id_new_item" name="item_text" class = "form-control input-lg" placeholder="Enter a to-do item"/>-->         

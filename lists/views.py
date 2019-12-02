@@ -28,22 +28,30 @@ def home_page(request):
 def view_list(request, list_id):
     
     list_ = List.objects.get(id=list_id)
-    error = None
+    #error = None
     #items = Item.objects.filter(list=list_)
-    
+    form = ItemForm()
+
     if request.method == "POST":
         
-        try:
-            item = Item(text=request.POST['text'], list=list_)
-            item.full_clean()
-            item.save()
-            #address = '/lists/{}/'.format(list_.id)
+        form = ItemForm(data=request.POST)
+        
+        if form.is_valid():
+
+            Item.objects.create(text=request.POST['text'], list=list_)
             return redirect(list_)
+
+        #try:
+        #    item = Item(text=request.POST['text'], list=list_)
+        #    item.full_clean()
+        #    item.save()
+            #address = '/lists/{}/'.format(list_.id)
+        #    return redirect(list_)
     
-        except ValidationError:
-            error = "You can't have an empty list item"
-    
-    return render(request, 'list.html', {'list':list_, 'error': error})
+        #except ValidationError:
+        #    error = "You can't have an empty list item"
+
+    return render(request, 'list.html', {'list':list_, 'form': form})
     
     #items = Item.objects.all()
     #return render(request, 'list.html', {'items': items})
@@ -52,24 +60,30 @@ def view_list(request, list_id):
 
 def new_list(request):
     
-    list_ = List.objects.create()
-    new_item_text = request.POST['text']
-    item = Item.objects.create(text=new_item_text, list=list_)
-    
+    form = ItemForm(data=request.POST)
+
+    if form.is_valid():
+        list_ = List.objects.create()
+        new_item_text = request.POST['text']
+        item = Item.objects.create(text=new_item_text, list=list_)
+        return redirect(list_)
+
     # Validando se o valor do item recebido e vazio
-    try:
-        item.full_clean()
-        item.save()
-    except ValidationError:
-        list_.delete()
-        error = "You can't have an empty list item"
-        return render(request, 'home.html', {'error': error})
+    #try:
+    #    item.full_clean()
+    #    item.save()
+    #except ValidationError:
+    #    list_.delete()
+    #    error = "You can't have an empty list item"
+
+    else:
+        return render(request, 'home.html', {'form': form})
         
     #return redirect(f'/lists/{list_.id}/')
     #address = '/lists/{}/'.format(list_.id)
 
     # Function reverse url by Django in the creation of object
-    return redirect(list_)
+    #return redirect(list_)
      
     
 
