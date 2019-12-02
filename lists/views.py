@@ -66,7 +66,7 @@ def new_list(request):
     #return redirect(f'/lists/{list_.id}/')
     #address = '/lists/{}/'.format(list_.id)
 
-    # Function reverse url by Django
+    # Function reverse url by Django in the creation of object
     return redirect(list_)
      
     
