@@ -1,12 +1,14 @@
 from django.test import TestCase
 from django.urls import resolve
-from ..views import home_page, java_script
+from lists.views import home_page, java_script
 from django.http import HttpRequest
-from ..models import Item, List
+from lists.models import Item, List
 from django.utils.html import escape
+from lists.forms import ItemForm
+from unittest import skip
 
 # Create your tests here.
-class ListViewTest(TestCase):
+class HomePageTest(TestCase):
     
     # Este metodo foi utilizado no primeiro teste, nao sendo necessario posteriormente, pois esse teste esta sendo feito no metodo abaixo.
     def test_root_url_resolves_to_home_page_view(self):
@@ -22,7 +24,12 @@ class ListViewTest(TestCase):
          # Verificar se estou recebendo o template correto na renderizacao da resposta
          self.assertTemplateUsed(response, 'home.html')  
     
-        
+
+    def test_home_page_uses_item_form(self):
+
+        response = self.client.get('/')
+        self.assertIsInstance(response.context['form'], ItemForm)
+
         
     # Este metodo foi substituido pelo metodo acima
     def test_home_page_returns_correct_html(self):
@@ -35,7 +42,7 @@ class ListViewTest(TestCase):
         
         response = self.client.get('/')
         html = response.content.decode('UTF-8')
-        self.assertTrue(html.startswith('<html>'))
+        self.assertTrue(html.startswith('<!doctype html>'))
         self.assertIn('<title>To-Do lists</title>', html)
         self.assertTrue(html.endswith('</html>'))
         
@@ -43,8 +50,9 @@ class ListViewTest(TestCase):
         self.assertTemplateUsed(response, 'home.html')
     
     
-    
-    
+
+    # Teste desativado    
+    @skip
     def test_display_all_list_items(self):
         
         Item.objects.create(text='item 1')
@@ -171,7 +179,9 @@ class ListViewTest(TestCase):
         self.client.post(f'/lists/{list_.id}/', data={'item_text': ''})
         
         self.assertEqual(Item.objects.count(), 2)
-        
+                
+
+
 
 class EstudoJavaScript(TestCase):
     

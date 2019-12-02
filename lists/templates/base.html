@@ -18,14 +18,16 @@
 
                         <form method="POST" action='{% block form_action %}{% endblock %}'>
                             {% csrf_token %}
-                            <!--<input id="id_new_item" name="item_text" class = "form-control input-lg" placeholder="Enter a to-do item"/>-->
+                           
+                            {{ form.text }}
+
                             {% if error %}
-                                <input id="id_new_item" name="item_text" class = "form-control input-lg is-invalid" placeholder="Enter a to-do item"/>
+                                <!--<input id="id_new_item" name="item_text" class = "form-control input-lg is-invalid" placeholder="Enter a to-do item"/>-->
                                 <div class="form-group has-error">
                                     <span class="help-block"></br><div class="alert alert-danger" role="alert">{{ error }}</div></span>
                                 </div>
                             {% else %}
-                                <input id="id_new_item" name="item_text" class = "form-control input-lg" placeholder="Enter a to-do item"/>
+                                <!--<input id="id_new_item" name="item_text" class = "form-control input-lg" placeholder="Enter a to-do item"/>-->         
                             {% endif %}
                         </form>
 
