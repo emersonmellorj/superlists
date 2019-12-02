@@ -23,7 +23,8 @@ class NewVisitorTest(FunctionalTest):
         time.sleep(3)
         
         # Ela e convidada a inserir um item de tarefa imediatamente.
-        inputbox = self.browser.find_element_by_id('id_new_item')
+        #inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox = self.get_item_input_box()
         self.assertEqual(inputbox.get_attribute('placeholder'), 'Enter a to-do item')
         time.sleep(3)
         
@@ -37,7 +38,8 @@ class NewVisitorTest(FunctionalTest):
         #self.assertTrue(any(row.text == '1 - Buy peacock feathers' for row in rows), f"New to-do item not appear in table. Contents were: \n{table.text}")
         
         # Ainda continua havendo uma caixa de texto convidando-a a acrescentar outro item. Ela insere "Use peacock feathers to make a fly". Edith e bem metodica.
-        inputbox = self.browser.find_element_by_id('id_new_item')
+        #inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox = self.get_item_input_box()
         
         inputbox.send_keys('2 - Use peacock feathers to make a fly')
         inputbox.send_keys(Keys.ENTER)
@@ -58,7 +60,8 @@ class NewVisitorTest(FunctionalTest):
         
         # Edith inicia uma nova lista de tarefas
         self.browser.get(self.live_server_url)
-        inputbox = self.browser.find_element_by_id("id_new_item")
+        #inputbox = self.browser.find_element_by_id("id_new_item")
+        inputbox = self.get_item_input_box()
         inputbox.send_keys('1 - Buy peacock feathers')
         inputbox.send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table('1 - Buy peacock feathers')
@@ -81,7 +84,8 @@ class NewVisitorTest(FunctionalTest):
         self.assertNotIn('make a fly', page_text)
         
         # Francis inicia uma nova lista inserindo um item novo. Ele é menos interessante que Edith
-        inputbox = self.browser.find_element_by_id("id_new_item")
+        #inputbox = self.browser.find_element_by_id("id_new_item")
+        inputbox = self.get_item_input_box()
         inputbox.send_keys('1 - Buy milk')
         inputbox.send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table('1 - Buy milk')

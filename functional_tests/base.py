@@ -65,6 +65,11 @@ class FunctionalTest(StaticLiveServerTestCase):
                 print(f'{time.time()} - {start_time}')
                 time.sleep(0.5)
 
+    
+    def get_item_input_box(self):
+
+        return self.browser.find_element_by_id('id_text')
+
 
  # Este if nao e mais necessario, pois estamor utilizando o servidor de testes do Django               
 if __name__ == '__main__':
